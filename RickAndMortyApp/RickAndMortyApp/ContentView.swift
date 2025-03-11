@@ -13,21 +13,23 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(viewModel.characters) { character in
-                HStack {
-                    AsyncImage(url: URL(string: character.image)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    
-                    VStack(alignment: .leading) {
-                        Text(character.name)
-                            .font(.headline)
-                        Text(character.species)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                NavigationLink(destination: CharacterDetailView(character: character)) {
+                    HStack {
+                        AsyncImage(url: URL(string: character.image)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        
+                        VStack(alignment: .leading) {
+                            Text(character.name)
+                                .font(.headline)
+                            Text(character.species)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
             }
